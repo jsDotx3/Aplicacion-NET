@@ -1,0 +1,214 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="AplicacionWeb.Main" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link href="static/css/bootstrap.min.css" rel="stylesheet" />
+<link href="static/css/main.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.3/jquery.tipsy.min.css" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tipsy/1.0.3/jquery.tipsy.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $("[title]").tipsy({fade: true, gravity: $.fn.tipsy.autoNS});
+  });
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+
+function validar_rut(source, arguments)
+{
+var rut=arguments.Value;suma=0;mul=2;i=0;
+
+for (i=rut.length-3;i>=0;i--)
+{
+suma=suma+parseInt(rut.charAt(i)) * mul;
+mul= mul==7 ? 2 : mul+1;
+}
+
+var dvr = ''+(11 - suma % 11);
+if (dvr=='10') dvr = 'K'; else if (dvr=='11') dvr = '0';
+
+if (rut.charAt(rut.length-2)!="-"||rut.charAt(rut.length-1).toUpperCase()!=dvr) 
+arguments.IsValid = false;
+else
+arguments.IsValid = true;
+}
+</script>
+
+        <link rel="icon" href="static/favicon.ico" type="image/x-icon"/>
+    <title>Administración</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+       
+<asp:ContentPlaceHolder ID="Menu" runat="server">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="container">
+                <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.aspx">Administración</a>
+          </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <asp:SiteMapDataSource runat="server" ShowStartingNode="false" SiteMapProvider="Cliente.SiteMapProvider"/>
+                        <asp:Repeater runat="server" ID="Repeater1" DataSourceID="SiteMapDataSource1">
+                            <ItemTemplate>
+                                <li class="dropdown"><a href="'<%# Eval("Url") %>'" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%# Eval("Title") %><span class="caret"></span></a>
+                                    <asp:Repeater ID="Repeater4" runat="server" DataSource='<%# ((SiteMapNode) Container.DataItem).ChildNodes %>'>
+                                        <HeaderTemplate>
+                                            <ul class="dropdown-menu" role="menu">
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <li>
+                                                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%# Eval("Url") %>'><%# Eval("Title") %></asp:HyperLink>
+                                            </li>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                            </ul>
+                                        </FooterTemplate>
+                                    </asp:Repeater>
+                                </li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" SiteMapProvider="Cliente.SiteMapProvider"/>
+                        <asp:SiteMapDataSource runat="server" ShowStartingNode="false" SiteMapProvider="Ventas.SiteMapProvider"/>
+                        <asp:Repeater runat="server" ID="Repeater2" DataSourceID="SiteMapDataSource2" >
+                            <ItemTemplate>
+                                <li class="dropdown"><a href="'<%# Eval("Url") %>'" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%# Eval("Title") %><span class="caret"></span></a>
+                                    <asp:Repeater ID="Repeater4" runat="server" DataSource='<%# ((SiteMapNode) Container.DataItem).ChildNodes %>'>
+                                        <HeaderTemplate>
+                                            <ul class="dropdown-menu" role="menu">
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <li>
+                                                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%# Eval("Url") %>'><%# Eval("Title") %></asp:HyperLink>
+                                            </li>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                            </ul>
+                                        </FooterTemplate>
+                                    </asp:Repeater>
+                                </li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <asp:SiteMapDataSource ID="SiteMapDataSource2" runat="server" SiteMapProvider="Ventas.SiteMapProvider"/>
+                        <asp:SiteMapDataSource runat="server" ShowStartingNode="false" SiteMapProvider="Automovil.SiteMapProvider"/>
+                        <asp:Repeater runat="server" ID="Repeater3" DataSourceID="SiteMapDataSource3">
+                            <ItemTemplate>
+                                <li class="dropdown"><a href="'<%# Eval("Url") %>'" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%# Eval("Title") %><span class="caret"></span></a>
+                                    <asp:Repeater ID="Repeater3" runat="server" DataSource='<%# ((SiteMapNode) Container.DataItem).ChildNodes %>'>
+                                        <HeaderTemplate>
+                                            <ul class="dropdown-menu" role="menu">
+                                        </HeaderTemplate>
+                                        <ItemTemplate>
+                                            <li>
+                                                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl='<%# Eval("Url") %>'><%# Eval("Title") %></asp:HyperLink>
+                                            </li>
+                                        </ItemTemplate>
+                                        <FooterTemplate>
+                                            </ul>
+                                        </FooterTemplate>
+                                    </asp:Repeater>
+                                </li>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <asp:SiteMapDataSource ID="SiteMapDataSource3" runat="server" SiteMapProvider="Automovil.SiteMapProvider"/>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div></div>
+            <!--/.container-fluid -->
+        </nav>
+   
+</asp:ContentPlaceHolder>
+        <asp:ContentPlaceHolder ID="Contenido" runat="server">
+            <div class="container">  
+          <h1 class="page-header">Inicio</h1>
+
+          <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="static/images/avatar.jpg" width="200" height="200" class="img-responsive img-circle" alt="Generic placeholder thumbnail" title="Vendedor #1"/>
+              <h4>Vendedor #1</h4>
+              <span class="text-muted">100 ventas</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="static/images/avatar.jpg" width="200" height="200" class="img-responsive img-circle" alt="Generic placeholder thumbnail"  title="Vendedor #2"/>
+              <h4>Vendedor #2</h4>
+              <span class="text-muted">90 ventas</span>
+            </div>
+               <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="static/images/avatar.jpg" width="200" height="200" class="img-responsive img-circle" alt="Generic placeholder thumbnail"  title="Vendedor #3"/>
+              <h4>Vendedor #3</h4>
+              <span class="text-muted">80 ventas</span>
+            </div>
+               <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="static/images/avatar.jpg" width="200" height="200" class="img-responsive img-circle" alt="Generic placeholder thumbnail"  title="Vendedor #4"/>
+              <h4>Vendedor #4</h4>
+              <span class="text-muted">70 ventas</span>
+            </div>
+          </div>
+
+          <h2 class="sub-header">Ultimas ventas</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Automovil</th>
+                  <th>Dueño</th>
+                  <th>Vendedor</th>
+                  <th>Comprador</th>
+                  <th>Fecha</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr> <td>30</td><td>Chevrolete Camaro</td><td>Roberto Galvez</td><td>Roberto Nuñez</td><td>Linda Pizarro</td><td>01/07/2015</tr>
+<tr> <td>29</td><td>Chevrolet Spark</td><td>Claudio España</td><td>Jorge Valdivia</td><td>Juan Rodriguez</td><td>01/07/2015</tr>
+<tr> <td>28</td><td>Peugueot 206</td><td>Roberto Galvez</td><td>Roberto Nuñez</td><td>David Ospina</td><td>14/05/2013</tr>
+<tr> <td>27</td><td>Peugueot 208</td><td>Claudio España</td><td>Juan Rodriguez</td><td>Linda Pizarro</td><td>01/05/2002</tr>
+<tr> <td>26</td><td>Chevrolet Spark</td><td>Roberto Galvez</td><td>Juan Rodriguez</td><td>Carolina Ahumada</td><td>15/08/2020</tr>
+<tr> <td>25</td><td>Peugueot 206</td><td>Claudio España</td><td>Bob Marley</td><td>Linda Pizarro</td><td>01/05/2002</tr>
+<tr> <td>24</td><td>Peugueot 206</td><td>Juan Nuñez</td><td>Bob Marley</td><td>Juan Rodriguez</td><td>15/08/2020</tr>
+<tr> <td>23</td><td>Peugueot 208</td><td>Rodrigo Acuña</td><td>Juan Riquelme</td><td>Carolina Ahumada</td><td>15/08/2020</tr>
+<tr> <td>22</td><td>Chevrolet Spark</td><td>Claudio España</td><td>Juan Rodriguez</td><td>Linda Pizarro</td><td>15/08/2020</tr>
+<tr> <td>21</td><td>Chevrolet Spark</td><td>Rodrigo Acuña</td><td>Patricio Estrella</td><td>Carolina Ahumada</td><td>14/05/2013</tr>
+<tr> <td>20</td><td>Nissan terrano</td><td>Claudio España</td><td>Jorge Valdivia</td><td>Javier Gutierrez</td><td>15/08/2020</tr>
+<tr> <td>19</td><td>Peugueot 208</td><td>Fabricio Yañez</td><td>Roberto Nuñez</td><td>Linda Pizarro</td><td>15/08/2020</tr>
+<tr> <td>18</td><td>Peugueot 206</td><td>Juan Nuñez</td><td>Jorge Valdivia</td><td>Javier Gutierrez</td><td>14/05/2013</tr>
+<tr> <td>17</td><td>Peugueot 208</td><td>Fabricio Yañez</td><td>Bob Marley</td><td>David Ospina</td><td>01/05/2002</tr>
+<tr> <td>16</td><td>Opel Corsa</td><td>Juan Pinto</td><td>Juan Riquelme</td><td>Juan Rodriguez</td><td>15/08/2020</tr>
+<tr> <td>15</td><td>Chevrolet Spark</td><td>Juan Pinto</td><td>Juan Rodriguez</td><td>Jorge Matutes</td><td>04/07/2010</tr>
+<tr> <td>14</td><td>Peugueot 208</td><td>Juan Nuñez</td><td>Roberto Nuñez</td><td>Jorge Matutes</td><td>14/05/2013</tr>
+<tr> <td>13</td><td>Chevrolet Spark</td><td>Juan Nuñez</td><td>Juan Riquelme</td><td>Linda Pizarro</td><td>01/07/2015</tr>
+<tr> <td>12</td><td>Peugueot 208</td><td>Rodrigo Acuña</td><td>Juan Riquelme</td><td>Jorge Matutes</td><td>14/05/2013</tr>
+<tr> <td>11</td><td>Chevrolet Spark</td><td>Fabricio Yañez</td><td>Juan Riquelme</td><td>Jorge Matutes</td><td>01/07/2015</tr>
+<tr> <td>10</td><td>Peugueot 208</td><td>Rodrigo Acuña</td><td>Roberto Nuñez</td><td>Linda Pizarro</td><td>14/05/2013</tr>
+<tr> <td>9</td><td>Opel Corsa</td><td>Rodrigo Acuña</td><td>Juan Rodriguez</td><td>Jorge Matutes</td><td>01/05/2002</tr>
+<tr> <td>8</td><td>Peugueot 208</td><td>Fabricio Yañez</td><td>Juan Riquelme</td><td>Linda Pizarro</td><td>01/07/2015</tr>
+<tr> <td>7</td><td>Nissan terrano</td><td>Roberto Galvez</td><td>Jorge Valdivia</td><td>Juan Rodriguez</td><td>01/05/2002</tr>
+<tr> <td>6</td><td>Peugueot 208</td><td>Rodrigo Acuña</td><td>Jorge Valdivia</td><td>Javier Gutierrez</td><td>01/05/2002</tr>
+<tr> <td>5</td><td>Nissan terrano</td><td>Claudio España</td><td>Juan Riquelme</td><td>Juan Rodriguez</td><td>14/05/2013</tr>
+<tr> <td>4</td><td>Peugueot 208</td><td>Juan Pinto</td><td>Patricio Estrella</td><td>Javier Gutierrez</td><td>01/07/2015</tr>
+<tr> <td>3</td><td>Peugueot 208</td><td>Roberto Galvez</td><td>Bob Marley</td><td>Carolina Ahumada</td><td>04/07/2010</tr>
+<tr> <td>2</td><td>Chevrolet Spark</td><td>Fabricio Yañez</td><td>Juan Rodriguez</td><td>David Ospina</td><td>04/02/2015</tr>
+                  <tr> <td>1</td><td>Nissan terrano</td><td>Fabricio Yañez</td><td>Roberto Nuñez</td><td>Carolina Ahumada</td><td>01/05/2002</tr>
+              </tbody>
+            </table>
+          </div>
+        
+            </div>
+</asp:ContentPlaceHolder>
+       </form>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+c:\users\informatica\documents\visual studio 2012\Projects\AplicacionWeb\AplicacionWeb\bin\AplicacionWeb.dll
+c:\users\informatica\documents\visual studio 2012\Projects\AplicacionWeb\AplicacionWeb\bin\AplicacionWeb.pdb
+c:\users\informatica\documents\visual studio 2012\Projects\AplicacionWeb\AplicacionWeb\obj\Debug\AplicacionWeb.dll
+c:\users\informatica\documents\visual studio 2012\Projects\AplicacionWeb\AplicacionWeb\obj\Debug\AplicacionWeb.pdb
+F:\AplicacionWeb\AplicacionWeb\bin\AplicacionWeb.dll
+F:\AplicacionWeb\AplicacionWeb\bin\AplicacionWeb.pdb
+F:\AplicacionWeb\AplicacionWeb\obj\Debug\AplicacionWeb.csprojResolveAssemblyReference.cache
+F:\AplicacionWeb\AplicacionWeb\obj\Debug\AplicacionWeb.dll
+F:\AplicacionWeb\AplicacionWeb\obj\Debug\AplicacionWeb.pdb
+D:\AplicacionWeb\AplicacionWeb\bin\AplicacionWeb.dll.config
+D:\AplicacionWeb\AplicacionWeb\bin\AplicacionWeb.dll
+D:\AplicacionWeb\AplicacionWeb\bin\AplicacionWeb.pdb
+D:\AplicacionWeb\AplicacionWeb\obj\Debug\AplicacionWeb.csprojResolveAssemblyReference.cache
+D:\AplicacionWeb\AplicacionWeb\obj\Debug\AplicacionWeb.dll
+D:\AplicacionWeb\AplicacionWeb\obj\Debug\AplicacionWeb.pdb
